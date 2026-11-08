@@ -1,0 +1,326 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+
+import Hero from '../../components/Hero.astro';
+import Icon from '../../components/Icon.astro';
+import JoinUsCTA from '../../components/JoinUsCTA.astro';
+import Pill from '../../components/Pill.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Props {
+  entry: CollectionEntry<'alliances'>;
+}
+
+// This is a dynamic route that generates a page for every Markdown file in src/content/
+// Read more about dynamic routes and this `getStaticPaths` function in the Astro docs:
+// https://docs.astro.build/en/core-concepts/routing/#dynamic-routes
+export async function getStaticPaths() {
+  const work = await getCollection('alliances');
+  return work.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const suns = entry.data.wins && entry.data.wins >= 25 ? Math.floor(entry.data.wins / 25) : 0;
+const displaySuns = new Array(suns).fill('☀️');
+const moons = entry.data.wins && entry.data.wins >= 5 ? Math.floor((entry.data.wins - suns * 25) / 5) : 0;
+const displayMoons = new Array(moons).fill('🌙');
+const starts = entry.data.wins && entry.data.wins >= 1 ? entry.data.wins - suns * 25 - moons * 5 : 0;
+const displayStars = new Array(starts).fill('⭐');
+
+const showWins = entry.data.wins && entry.data.wins > 0;
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <div class="stack gap-20">
+    <div class="stack gap-15">
+
+      <header>
+        <div class="wrapper stack gap-2">
+          <a class="back-link" href="/alliances/"><Icon icon="arrow-left" /> Alliances</a>
+          <Hero title={entry.data.title} align="start">
+            <div class="details">
+              <div class="tags">
+                {showWins && (<div class="wins">{suns > 0 ? displaySuns.map(() => <img src="/assets/icons/sun.png" alt="Sun" />) : ''} {moons > 0 ? displayMoons.map(() => <img src="/assets/icons/moon.png" alt="Moon" />) : ''} {starts > 0 ? displayStars.map(() => <img src="/assets/icons/star.png" alt="Star" />) : '' }</div>)}
+                {entry.data.tags.map((t) => <Pill>{t}</Pill>)}
+              </div>
+              <p class="description">{entry.data.description}</p>
+            </div>
+
+          </Hero>
+        </div>
+      </header>
+
+      <main class="wrapper">
+        <div class="stack gap-10 content">
+          {entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
+          <!-- <div class="content text-content">
+            <Content />
+          </div> -->
+          <div class="content text-content">
+            {entry.data.languages ? (
+              <div class="stack">
+                <div class="h-stack">
+                  <div class="image-wrapper">
+                    <img width="80" height="80" src="/assets/language-icon.png" alt="Languages" />
+                  </div>
+
+                  <h5>
+                    Languages<br />
+                    <small>언어</small><br />
+                    <small>语言</small>
+                  </h5>
+                </div>
+                <div>
+                  <p>
+                    <b>{entry.data.languages.join(", ")}</b>
+                  </p>
+                </div>
+              </div>
+            ): null}
+
+            {entry.data.bear ? (
+              <div class="stack">
+                <div class="h-stack">
+                  <div class="image-wrapper">
+                    <img width="80" height="80" src="/assets/events/bear-icon.png" alt="Bear Trap" />
+                  </div>
+                  <h5>
+                    Bear Trap<br />
+                    <small>곰</small><br />
+                    <small>熊</small>
+                  </h5>
+                </div>
+                <div>
+                  {entry.data.bear.map((bear) => {
+                    return (
+                      <p><b>{bear}</b></p>
+                    );
+                  })}
+                </div>
+              </div>
+            ): null}
+
+            {entry.data.swordland ? (
+              <div class="stack">
+                <div class="h-stack">
+                  <div class="image-wrapper">
+                    <img width="80" height="80" src="/assets/events/swordland-icon.png" alt="Swordland" />
+                  </div>
+                  <h5>
+                    Swordland<br />
+                    <small>성검 등</small><br />
+                    <small>劍域等等</small>
+                  </h5>
+                </div>
+                <div>
+                  {entry.data.swordland.map((swordland) => {
+                    return (
+                      <p><b>{swordland}</b></p>
+                    );
+                  })}
+                </div>
+              </div>
+            ): null}
+
+            {entry.data.tri_alliance_clash ? (
+              <div class="stack">
+                <div class="h-stack">
+                  <div class="image-wrapper">
+                    <img width="80" height="80" src="/assets/events/tri-alliance-icon.png" alt="Tri Alliance Clash" />
+                  </div>
+                  <h5>
+                    Tri-Alliance Clash<br />
+                    <small>三盟</small><br />
+                    <small>삼대연맹전</small>
+                  </h5>
+                </div>
+                <div>
+                  {entry.data.tri_alliance_clash.map((tri) => {
+                    return (
+                      <p><b>{tri}</b></p>
+                    );
+                  })}
+                </div>
+              </div>
+            ): null}
+
+            {entry.data.vikings ? (
+              <div class="stack">
+                <div class="h-stack">
+                  <div class="image-wrapper">
+                    <img width="80" height="80" src="/assets/events/vikings-icon.png" alt="Vikings" />
+                  </div>
+                  <h5>
+                    Vikings Vengeance<br />
+                    <small>바이킹 활동 시간</small><br />
+                    <small>維京人活動</small>
+                  </h5>
+                </div>
+                <div>
+                  {entry.data.vikings.map((vikings) => {
+                    return (
+                      <p><b>{vikings}</b></p>
+                    );
+                  })}
+                </div>
+              </div>
+            ): null}
+
+            {entry.data.cesares ? (
+              <div class="stack">
+                <div class="h-stack">
+                  <div class="image-wrapper">
+                    <img width="80" height="80" src="/assets/events/cesares-icon.png" alt="Vikings" />
+                  </div>
+                  <h5>
+                    Cesares Bosses<br />
+                    <small>체사레 보스를 정복하세요</small><br />
+                    <small>征討切薩雷</small>
+                  </h5>
+                </div>
+                <div>
+                  {entry.data.cesares.map((cesares) => {
+                    return (
+                      <p><b>{cesares}</b></p>
+                    );
+                  })}
+                </div>
+              </div>
+            ): null}
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <JoinUsCTA />
+  </div>
+</BaseLayout>
+
+<style>
+  header {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--gray-800);
+  }
+
+  h5 > small {
+    font-size: 1rem;
+  }
+
+  .h-stack {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .image-wrapper {
+    display: flex;
+    flex: 1;
+  }
+
+  .back-link {
+    display: none;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    gap: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .description {
+    font-size: var(--text-lg);
+    max-width: 54ch;
+  }
+
+  .wins {
+    display: flex;
+    align-items: center;
+  }
+
+  .wins > img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .content {
+    max-width: 65ch;
+    margin-inline: auto;
+  }
+
+  .content.text-content {
+    margin: 0;
+  }
+
+  .content > :global(* + *) {
+    margin-top: 1rem;
+  }
+
+  .content :global(h1),
+  .content :global(h2),
+  .content :global(h3),
+  .content :global(h4),
+  .content :global(h5) {
+    margin: 1.5rem 0;
+  }
+
+  .content :global(img) {
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    background: var(--gradient-subtle);
+    border: 1px solid var(--gray-800);
+  }
+
+  .content :global(blockquote) {
+    font-size: var(--text-lg);
+    font-family: var(--font-brand);
+    font-weight: 600;
+    line-height: 1.1;
+    padding-inline-start: 1.5rem;
+    border-inline-start: 0.25rem solid var(--accent-dark);
+    color: var(--gray-0);
+  }
+
+  .back-link,
+  .content :global(a) {
+    text-decoration: 1px solid underline transparent;
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color var(--theme-transition);
+  }
+
+  .back-link:hover,
+  .back-link:focus,
+  .content :global(a:hover),
+  .content :global(a:focus) {
+    text-decoration-color: currentColor;
+  }
+
+  @media (min-width: 50em) {
+    .back-link {
+      display: block;
+      align-self: flex-start;
+    }
+
+    .details {
+      flex-direction: row;
+      gap: 2.5rem;
+    }
+
+    .content :global(blockquote) {
+      font-size: var(--text-2xl);
+    }
+  }
+</style>

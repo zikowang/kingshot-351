@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import AlliancePreview from '../components/AlliancePreview.astro';
+import Grid from '../components/Grid.astro';
+import Hero from '../components/Hero.astro';
+import { displayAlliances } from '../constants/constants';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const alliances = (await getCollection('alliances'))
+  .sort(
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+  )
+  .filter((project) => displayAlliances.includes(project.data.id));
+---
+
+<BaseLayout
+	title="Alliances | K 351"
+	description="Learn about K 351's alliances"
+>
+	<div class="stack gap-20">
+		<main class="wrapper stack gap-8">
+			<Hero
+				title="Alliances"
+				tagline="See our alliances below to get an idea of our kingdom."
+				align="start"
+			/>
+			<Grid>
+				{
+					alliances.map((project) => (
+						<li>
+							<AlliancePreview project={project} />
+						</li>
+					))
+				}
+			</Grid>
+		</main>
+		<!-- <ContactCTA /> -->
+	</div>
+</BaseLayout>

@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import { displayAlliances } from '../constants/constants';
+
+const alliances = (await getCollection('alliances')).sort(
+	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+).filter((project) => displayAlliances.includes(project.data.id));
+---
+
+<section class="box skills">
+	<div class="stack gap-2 lg:gap-4">
+		<h2>KvK Focused</h2>
+		<p>We save for KvK preparation and fight hard in battle (<a class="external-link" href="https://ks-atlas.com/kingdom/351" target="_blank">→ Atlas Score</a>)</p>
+
+	</div>
+	<div class="stack gap-2 lg:gap-4">
+		<h2>Active</h2>
+		<p>{alliances.length} big alliances filled with active players from all over the world.</p>
+	</div>
+	<div class="stack gap-2 lg:gap-4">
+		<h2>Peaceful</h2>
+		<p>No town hitting within the kingdom allowed.</p>
+	</div>
+	<div class="stack gap-2 lg:gap-4">
+		<h2>United</h2>
+		<p>We help each other within the kingdom and fight together as one in battle.</p>
+	</div>
+	<div class="stack gap-2 lg:gap-4">
+		<h2>Shared Sanctuaries</h2>
+		<p>We share sanctuaries within the kingdom.</p>
+	</div>
+	<div class="stack gap-2 lg:gap-4">
+		<h2>Ready to help</h2>
+		<p>We are always ready to teach and support each other.</p>
+	</div>
+</section>
+
+<style>
+	.box {
+		border: 1px solid var(--gray-800);
+		border-radius: 0.75rem;
+		padding: 1.5rem;
+		background-color: var(--gray-999_40);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.skills {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+	}
+
+	.skills h2 {
+		font-size: var(--text-lg);
+	}
+
+	.skills p {
+		color: var(--gray-400);
+	}
+
+	@media (min-width: 50em) {
+		.box {
+			border-radius: 1.5rem;
+			padding: 2.5rem;
+		}
+
+		.skills {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 5rem;
+		}
+
+		.skills h2 {
+			font-size: var(--text-2xl);
+		}
+	}
+</style>
