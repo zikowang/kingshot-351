@@ -18,7 +18,7 @@ languages:
   - Indonesian
 bear:
   - 21:30 KST (12:30 UTC)
-  - 23:30 KST (14:30 UTC)
+  - 00:10 KST (15:10 UTC)
 vikings:
   - 21:30 KST / 22:00 KST (12:30 UTC / 13:00 UTC)
 tri_alliance_clash:
@@ -28,7 +28,7 @@ swordland:
 cesares:
   - 21:00 KST ~ 23:00 KST (12:00 UTC ~ 14:00 UTC)
 short:
-  - Bear 12:30 / 14:30 UTC
+  - Bear 12:30 / 15:10 UTC
   - Swordland 12:00 / 14:00 UTC
   - Tri-Alliance 12:00 / 14:00 UTC
   - Vikings 12:30 / 13:00 UTC
@@ -42,7 +42,7 @@ short:
 #### 곰
 
 - 곰1시간 21:30 KST
-- 곰2시간 23:30 KST
+- 곰2시간 00:10 KST
 
 #### 바이킹 활동 시간
 
@@ -67,7 +67,7 @@ short:
 #### 熊
 
 - 熊1時間:UTC 12:30
-- 熊2時間:UTC 14:30
+- 熊2時間:UTC 15:10
 
 #### 維京人活動
 
@@ -94,7 +94,7 @@ Korean, Chinese, English, Polish, Indonesian
 #### Bear
 
 - 12:30 UTC
-- 14:30 UTC
+- 15:10 UTC
 
 #### Vikings
 
