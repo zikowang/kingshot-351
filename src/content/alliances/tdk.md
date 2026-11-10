@@ -27,13 +27,13 @@ tri_alliance_clash:
 vikings:
   - 19:00 UTC
 cesares:
-  - 15:30 UTC and 19:30 UTC
+  - 02:30 UTC and 19:30 UTC
 short:
   - Bear 02:00 / 19:00 UTC
   - Swordland 14:00 / 19:00 UTC
   - Tri-Alliance 14:00 / 19:00 UTC
   - Vikings 19:00 UTC
-  - Cesares 15:30 / 19:30 UTC
+  - Cesares 02:30 / 19:30 UTC
 ---
 
 Be active and supportive, help the kingdom grow stronger every day!
@@ -63,4 +63,4 @@ english, french, turkish, german, chinese, arabic
 
 #### Cesares
 
-- 15:30 UTC and 19:30 UTC
+- 02:30 UTC and 19:30 UTC
