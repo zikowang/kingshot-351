@@ -29,16 +29,16 @@ tri_alliance_clash:
   - 14:00 UTC
   - 19:00 UTC
 vikings:
-  - Tuesday 14:00 UTC
-  - Thursday 19:00 UTC
+  - Tuesday 15:00 UTC
+  - Thursday 20:00 UTC
 cesares:
-  - split between 14:00 and 19:00 UTC
+  - split between 15:00 and 20:00 UTC
 short:
   - Bear 15:00 / 20:00 UTC
   - Swordland 14:00 / 19:00 UTC
   - Tri-Alliance 14:00 / 19:00 UTC
-  - Vikings 14:00 / 19:00 UTC
-  - Cesares 14:00 / 19:00 UTC
+  - Vikings 15:00 / 20:00 UTC
+  - Cesares 15:00 / 20:00 UTC
 ---
 
 We rally Fort and Sanctuaries. No solo hits
@@ -64,9 +64,9 @@ english, french, Deutsch, spanish, ukraine, chinese, turkish, filipino
 
 #### Vikings
 
-- Tuesday 14:00 UTC
-- Thursday 19:00 UTC
+- Tuesday 15:00 UTC
+- Thursday 20:00 UTC
 
 #### Cesares
 
-- split between 14:00 and 19:00 UTC
+- split between 15:00 and 20:00 UTC
