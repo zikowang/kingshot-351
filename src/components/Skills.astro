@@ -37,21 +37,33 @@ const alliances = (await getCollection('alliances')).sort(
 
 <style>
 	.box {
-		border: 1px solid var(--gray-800);
-		border-radius: 0.75rem;
+		border: 2px solid var(--gray-0);
+		border-radius: 0;
 		padding: 1.5rem;
-		background-color: var(--gray-999_40);
+		background-color: var(--gray-50);
 		box-shadow: var(--shadow-sm);
 	}
 
 	.skills {
 		display: flex;
 		flex-direction: column;
-		gap: 3rem;
+		gap: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+
+	.skills > div {
+		padding: 1.25rem;
+		border-bottom: 1px solid var(--gray-800);
+	}
+
+	.skills > div:last-child {
+		border-bottom: 0;
 	}
 
 	.skills h2 {
 		font-size: var(--text-lg);
+		color: var(--link-color);
 	}
 
 	.skills p {
@@ -60,14 +72,27 @@ const alliances = (await getCollection('alliances')).sort(
 
 	@media (min-width: 50em) {
 		.box {
-			border-radius: 1.5rem;
-			padding: 2.5rem;
+			padding: 0;
 		}
 
 		.skills {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
-			gap: 5rem;
+			gap: 0;
+		}
+
+		.skills > div {
+			padding: 2rem;
+			border-right: 1px solid var(--gray-800);
+			border-bottom: 1px solid var(--gray-800);
+		}
+
+		.skills > div:nth-child(3n) {
+			border-right: 0;
+		}
+
+		.skills > div:nth-last-child(-n + 3) {
+			border-bottom: 0;
 		}
 
 		.skills h2 {

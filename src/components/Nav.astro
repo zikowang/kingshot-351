@@ -127,7 +127,7 @@ const isCurrentPage = (href: string) => {
 		display: flex;
 		justify-content: space-between;
 		gap: 0.5rem;
-		padding: 1.5rem 0 ;
+		padding: 1rem 0;
 	}
 
 	.site-title {
@@ -142,20 +142,19 @@ const isCurrentPage = (href: string) => {
 	.menu-button {
 		position: relative;
 		display: flex;
-		border: 0;
-		border-radius: 999rem;
+		border: 2px solid var(--gray-0);
+		border-radius: 0;
 		padding: 0.5rem;
 		font-size: 1.5rem;
-		color: var(--gray-300);
-		background: radial-gradient(var(--gray-900), var(--gray-800) 150%);
-		box-shadow: var(--shadow-md);
+		color: var(--gray-0);
+		background: var(--gray-50);
+		box-shadow: 3px 3px 0 var(--accent-regular);
+		cursor: pointer;
 	}
 
 	.menu-button[aria-expanded='true'] {
-		color: var(--gray-0);
-		background:
-			linear-gradient(180deg, var(--gray-600), transparent),
-			radial-gradient(var(--gray-900), var(--gray-800) 150%);
+		color: var(--accent-text-over);
+		background: var(--accent-regular);
 	}
 
 	.menu-button[hidden] {
@@ -163,12 +162,7 @@ const isCurrentPage = (href: string) => {
 	}
 
 	.menu-button::before {
-		position: absolute;
-		inset: -1px;
-		content: '';
-		background: var(--gradient-stroke);
-		border-radius: 999rem;
-		z-index: -1;
+		content: none;
 	}
 
 	.menu-content {
@@ -186,8 +180,9 @@ const isCurrentPage = (href: string) => {
 		line-height: 1.2;
 		list-style: none;
 		padding: 2rem;
-		background-color: var(--gray-999);
-		border-bottom: 1px solid var(--gray-800);
+		background-color: var(--gray-50);
+		border: 2px solid var(--gray-0);
+		box-shadow: var(--shadow-md);
 	}
 
 	.link {
@@ -208,8 +203,9 @@ const isCurrentPage = (href: string) => {
 		justify-content: space-between;
 		gap: 0.75rem;
 		padding: 1.5rem 2rem 1.5rem 1.5rem;
-		background-color: var(--gray-999);
-		border-radius: 0 0 0.75rem 0.75rem;
+		background-color: var(--gray-50);
+		border: 2px solid var(--gray-0);
+		border-top: 0;
 		box-shadow: var(--shadow-lg);
 	}
 
@@ -244,7 +240,7 @@ const isCurrentPage = (href: string) => {
 			display: grid;
 			grid-template-columns: 1fr auto 1fr;
 			align-items: center;
-			padding: 2.5rem 1.5rem;
+			padding: 1.75rem 1.5rem;
 			gap: 1rem;
 		}
 
@@ -264,34 +260,30 @@ const isCurrentPage = (href: string) => {
 			position: relative;
 			flex-direction: row;
 			font-size: var(--text-sm);
-			border-radius: 999rem;
-			border: 0;
-			padding: 0.5rem 0.5625rem;
-			background: radial-gradient(var(--gray-900), var(--gray-800) 150%);
-			box-shadow: var(--shadow-md);
+			border-radius: 0;
+			border: 2px solid var(--gray-0);
+			padding: 0.35rem;
+			background: var(--gray-50);
+			box-shadow: 4px 4px 0 var(--accent-regular);
 		}
 
 		.nav-items::before {
-			position: absolute;
-			inset: -1px;
-			content: '';
-			background: var(--gradient-stroke);
-			border-radius: 999rem;
-			z-index: -1;
+			content: none;
 		}
 
 		.link {
 			padding: 0.5rem 1rem;
-			border-radius: 999rem;
+			border-radius: 0;
 			transition:
 				color var(--theme-transition),
-				background-color var(--theme-transition);
+				background-color var(--theme-transition),
+				transform var(--theme-transition);
 		}
 
 		.link:hover,
 		.link:focus {
-			color: var(--gray-100);
-			background-color: var(--accent-subtle-overlay);
+			color: var(--gray-0);
+			background-color: var(--gray-100);
 		}
 
 		.link[aria-current='page'] {
@@ -306,6 +298,7 @@ const isCurrentPage = (href: string) => {
 			align-items: center;
 			padding: 0;
 			background-color: transparent;
+			border: 0;
 			box-shadow: none;
 		}
 

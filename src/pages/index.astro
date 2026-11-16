@@ -83,8 +83,9 @@ const alliances = (await getCollection('alliances'))
 	.hero-img {
 		object-fit: cover;
 		object-position: top;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
+		border: 3px solid var(--gray-0);
+		border-radius: 0;
+		box-shadow: 7px 7px 0 var(--accent-regular);
 	}
 
 	@media (min-width: 50em) {
@@ -102,7 +103,7 @@ const alliances = (await getCollection('alliances'))
 		}
 
 		.hero-img {
-			border-radius: 1.5rem;
+			border-radius: 0;
 			object-fit: cover;
 		}
 	}
@@ -153,6 +154,7 @@ const alliances = (await getCollection('alliances'))
 
 	.section-header h3 {
 		font-size: var(--text-2xl);
+		color: var(--gray-0);
 	}
 
 	@media (min-width: 50em) {

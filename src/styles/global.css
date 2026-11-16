@@ -1,63 +1,56 @@
 /* Global variables */
 :root {
   /* Colors */
-  --gray-0: #090b11;
-  --gray-50: #141925;
-  --gray-100: #283044;
-  --gray-200: #3d4663;
-  --gray-300: #505d84;
-  --gray-400: #6474a2;
-  --gray-500: #8490b5;
-  --gray-600: #a3acc8;
-  --gray-700: #c3cadb;
-  --gray-800: #e3e6ee;
-  --gray-900: #f3f4f7;
-  --gray-999-basis: 0, 0%, 100%;
+  --gray-0: #1c2922;
+  --gray-50: #f8f3df;
+  --gray-100: #eee5c9;
+  --gray-200: #36483d;
+  --gray-300: #526457;
+  --gray-400: #5d6e5e;
+  --gray-500: #8d9783;
+  --gray-600: #a8ad94;
+  --gray-700: #c3c4a8;
+  --gray-800: #dedcc0;
+  --gray-900: #f0ecd8;
+  --gray-999-basis: 50, 36%, 93%;
   --gray-999_40: hsla(var(--gray-999-basis), 0.4);
-  --gray-999: #ffffff;
+  --gray-999: #fffdf4;
 
-  --accent-light: #d19c79;
-  --accent-regular: #9e6961;
-  --accent-dark: #634b59;
-  --accent-overlay: hsla(8, 24%, 50%, 0.33);
+  --accent-light: #f6c45b;
+  --accent-regular: #df783f;
+  --accent-dark: #984b30;
+  --accent-overlay: hsla(24, 72%, 56%, 0.2);
   --accent-subtle-overlay: var(--accent-overlay);
-  --accent-text-over: var(--gray-999);
+  --accent-text-over: #1c2922;
 
-  --link-color: var(--accent-regular);
+  --link-color: #803819;
 
   /* Gradients */
   --gradient-stop-1: var(--accent-light);
   --gradient-stop-2: var(--accent-regular);
   --gradient-stop-3: var(--accent-dark);
   --gradient-subtle: linear-gradient(
-    150deg,
-    var(--gray-900) 19%,
-    var(--gray-999) 150%
+    145deg,
+    var(--gray-50),
+    var(--gray-999)
   );
   --gradient-accent: linear-gradient(
-    150deg,
+    145deg,
     var(--gradient-stop-1),
     var(--gradient-stop-2),
     var(--gradient-stop-3)
   );
   --gradient-accent-orange: linear-gradient(
-    150deg,
-    #ca7879,
-    var(--accent-regular),
-    var(--accent-dark)
+    145deg,
+    var(--accent-light),
+    var(--accent-regular)
   );
-  --gradient-stroke: linear-gradient(180deg, var(--gray-900), var(--gray-700));
+  --gradient-stroke: linear-gradient(180deg, var(--gray-100), var(--gray-300));
 
   /* Shadows */
-  --shadow-sm:
-    0px 6px 3px rgba(9, 11, 17, 0.01), 0px 4px 2px rgba(9, 11, 17, 0.01),
-    0px 2px 2px rgba(9, 11, 17, 0.02), 0px 0px 1px rgba(9, 11, 17, 0.03);
-  --shadow-md:
-    0px 28px 11px rgba(9, 11, 17, 0.01), 0px 16px 10px rgba(9, 11, 17, 0.03),
-    0px 7px 7px rgba(9, 11, 17, 0.05), 0px 2px 4px rgba(9, 11, 17, 0.06);
-  --shadow-lg:
-    0px 62px 25px rgba(9, 11, 17, 0.01), 0px 35px 21px rgba(9, 11, 17, 0.05),
-    0px 16px 16px rgba(9, 11, 17, 0.1), 0px 4px 9px rgba(9, 11, 17, 0.12);
+  --shadow-sm: 3px 3px 0 rgba(28, 41, 34, 0.16);
+  --shadow-md: 5px 5px 0 rgba(28, 41, 34, 0.2);
+  --shadow-lg: 8px 8px 0 rgba(28, 41, 34, 0.24);
 
   /* Text Sizes */
   --text-sm: 0.875rem;
@@ -75,63 +68,53 @@
     system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   --font-body: "Public Sans", var(--font-system);
-  --font-brand: Rubik, var(--font-system);
+  --font-brand: "Pixelify Sans", Rubik, var(--font-system);
 
   /* Transitions */
-  --theme-transition: 0.2s ease-in-out;
+  --theme-transition: 0.18s ease-out;
 }
 
 :root.theme-dark {
-  --gray-0: #ffffff;
-  --gray-50: #f3f4f7;
-  --gray-100: #e3e6ee;
-  --gray-200: #c3cadb;
-  --gray-300: #a3acc8;
-  --gray-400: #8490b5;
-  --gray-500: #6474a2;
-  --gray-600: #505d84;
-  --gray-700: #3d4663;
-  --gray-800: #283044;
-  --gray-900: #141925;
-  --gray-999-basis: 225, 31%, 5%;
-  --gray-999: #090b11;
+  --gray-0: #fff8de;
+  --gray-50: #1c2922;
+  --gray-100: #26352c;
+  --gray-200: #d7d6bf;
+  --gray-300: #bdc1a8;
+  --gray-400: #a0aa94;
+  --gray-500: #859481;
+  --gray-600: #6a7c6d;
+  --gray-700: #506253;
+  --gray-800: #394a3e;
+  --gray-900: #29372e;
+  --gray-999-basis: 135, 20%, 11%;
+  --gray-999: #18221b;
 
-  --accent-light: #d19c79;
-  --accent-regular: #9e6961;
-  --accent-dark: #634b59;
-  --accent-overlay: hsla(8, 24%, 50%, 0.33);
-  --accent-subtle-overlay: hsla(8, 24%, 50%, 0.33);
-  --accent-text-over: var(--gray-0);
+  --accent-light: #f6cd70;
+  --accent-regular: #e88b50;
+  --accent-dark: #b8603a;
+  --accent-overlay: hsla(24, 72%, 56%, 0.22);
+  --accent-subtle-overlay: var(--accent-overlay);
+  --accent-text-over: #18221b;
 
-  --link-color: var(--gray-100);
+  --link-color: var(--accent-light);
 
   --gradient-stop-1: #4c11c6;
   --gradient-subtle: linear-gradient(
-    150deg,
-    var(--gray-900) 19%,
-    var(--gray-999) 81%
+    145deg,
+    var(--gray-100),
+    var(--gray-999)
   );
   --gradient-accent-orange: linear-gradient(
-    150deg,
-    #ca7879,
-    var(--accent-regular),
-    var(--accent-light)
+    145deg,
+    var(--accent-light),
+    var(--accent-regular)
   );
   --gradient-stroke: linear-gradient(180deg, var(--gray-600), var(--gray-800));
 
   --shadow-sm:
-    0px 6px 3px rgba(255, 255, 255, 0.01),
-    0px 4px 2px rgba(255, 255, 255, 0.01),
-    0px 2px 2px rgba(255, 255, 255, 0.02), 0px 0px 1px rgba(255, 255, 255, 0.03);
-  --shadow-md:
-    0px 28px 11px rgba(255, 255, 255, 0.01),
-    0px 16px 10px rgba(255, 255, 255, 0.03),
-    0px 7px 7px rgba(255, 255, 255, 0.05), 0px 2px 4px rgba(255, 255, 255, 0.06);
-  --shadow-lg:
-    0px 62px 25px rgba(255, 255, 255, 0.01),
-    0px 35px 21px rgba(255, 255, 255, 0.05),
-    0px 16px 16px rgba(255, 255, 255, 0.1),
-    0px 4px 9px rgba(255, 255, 255, 0.12);
+    3px 3px 0 rgba(0, 0, 0, 0.42);
+  --shadow-md: 5px 5px 0 rgba(0, 0, 0, 0.5);
+  --shadow-lg: 8px 8px 0 rgba(0, 0, 0, 0.58);
 }
 
 html,
@@ -142,6 +125,10 @@ body {
 
 body {
   background-color: var(--gray-999);
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--gray-800) 28%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--gray-800) 28%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
   color: var(--gray-200);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -164,6 +151,16 @@ a {
   color: var(--link-color);
 }
 
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--link-color);
+  outline-offset: 3px;
+}
+
+.external-link {
+  color: var(--link-color);
+}
+
 .external-link {
   font-weight: 700;
 }
@@ -180,7 +177,7 @@ h5 {
   line-height: 1.1;
   font-family: var(--font-brand);
   font-weight: 600;
-  color: var(--gray-100);
+  color: var(--gray-0);
 }
 
 h1 {
@@ -201,6 +198,11 @@ h4 {
 
 h5 {
   font-size: var(--text-xl);
+}
+
+::selection {
+  color: var(--accent-text-over);
+  background: var(--accent-light);
 }
 
 /* Utilities */
