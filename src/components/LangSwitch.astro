@@ -1,0 +1,112 @@
+---
+import { uiLanguages } from '../i18n/labels';
+
+const [first] = uiLanguages;
+---
+
+<lang-switch>
+	<label class="box">
+		<span class="sr-only">Label language</span>
+		<!-- What people see. Flexbox centers it; browsers can't shift it. -->
+		<span class="current" aria-hidden="true">
+			<img class="flag" src={`/assets/flags/${first.country}.svg`} alt="" width="20" height="15" />
+			<span class="name">{first.name}</span>
+		</span>
+		<span class="chevron" aria-hidden="true"></span>
+		<!-- Real select sits on top, invisible, so it still opens the native list. -->
+		<select>
+			{
+				uiLanguages.map(({ code, name, flag, country }) => (
+					<option value={code} data-country={country} data-name={name}>
+						{flag} {name}
+					</option>
+				))
+			}
+		</select>
+	</label>
+</lang-switch>
+
+<script>
+	class LangSwitch extends HTMLElement {
+		connectedCallback() {
+			const select = this.querySelector('select')!;
+			const flag = this.querySelector<HTMLImageElement>('.flag')!;
+			const name = this.querySelector('.name')!;
+
+			const show = () => {
+				const opt = select.selectedOptions[0];
+				flag.src = `/assets/flags/${opt.dataset.country}.svg`;
+				name.textContent = opt.dataset.name!;
+			};
+
+			select.value = document.documentElement.dataset.uiLang || 'en';
+			show();
+			select.addEventListener('change', () => {
+				document.documentElement.dataset.uiLang = select.value;
+				show();
+				try {
+					localStorage.setItem('ui-lang', select.value);
+				} catch {}
+			});
+		}
+	}
+	customElements.define('lang-switch', LangSwitch);
+</script>
+
+<style>
+	.box {
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		height: 2.25rem;
+		padding: 0 0.6rem;
+		font-size: var(--text-sm);
+		line-height: 1;
+		color: var(--gray-0);
+		background: var(--gray-50);
+		border: 2px solid var(--gray-0);
+		box-shadow: 3px 3px 0 var(--accent-regular);
+		cursor: pointer;
+	}
+
+	.current {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		white-space: nowrap;
+	}
+
+	/* SVG flag: exact box, so it centers (emoji glyphs sit high). */
+	.flag {
+		display: block;
+		width: 1.25rem;
+		height: auto;
+		aspect-ratio: 4 / 3;
+		outline: 1px solid color-mix(in srgb, var(--gray-0) 35%, transparent);
+	}
+
+	/* Pixel chevron, drawn in the text color. */
+	.chevron {
+		width: 0.6rem;
+		height: 0.3rem;
+		background:
+			linear-gradient(45deg, transparent 50%, currentColor 50%) left / 50% 100% no-repeat,
+			linear-gradient(135deg, currentColor 50%, transparent 50%) right / 50% 100% no-repeat;
+	}
+
+	select {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		font: inherit;
+		cursor: pointer;
+	}
+
+	.box:has(select:focus-visible) {
+		outline: 3px solid var(--link-color);
+		outline-offset: 3px;
+	}
+</style>

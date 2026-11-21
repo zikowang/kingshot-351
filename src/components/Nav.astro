@@ -1,24 +1,17 @@
 ---
+import { type Label, ui } from '../i18n/labels';
 import Icon from './Icon.astro';
-import type { iconPaths } from './IconPaths';
+import LangSwitch from './LangSwitch.astro';
+import T from './T.astro';
 import ThemeToggle from './ThemeToggle.astro';
 
 /** Main menu items */
-const textLinks: { label: string; href: string }[] = [
-	{ label: 'Kingdom', href: '/' },
-	{ label: 'Alliances', href: '/alliances/' },
+const textLinks: { label: Label; href: string }[] = [
+	{ label: ui.navKingdom, href: '/' },
+	{ label: ui.navAlliances, href: '/alliances/' },
 	// { label: 'Rules', href: '/rules/' },
 ];
 
-/** Icon links to social media — edit these with links to your profiles! */
-const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
-	{ label: 'Twitter', href: 'https://twitter.com/me', icon: 'twitter-logo' },
-	{ label: 'Twitch', href: 'https://twitch.tv/me', icon: 'twitch-logo' },
-	{ label: 'GitHub', href: 'https://github.com/me', icon: 'github-logo' },
-	{ label: 'CodePen', href: 'https://codepen.io/me', icon: 'codepen-logo' },
-	{ label: 'dribbble', href: 'https://dribbble.com/me', icon: 'dribbble-logo' },
-	{ label: 'YouTube', href: 'https://www.youtube.com/@me/', icon: 'youtube-logo' },
-];
 
 /** Test if a link is pointing to the current page. */
 const isCurrentPage = (href: string) => {
@@ -50,7 +43,7 @@ const isCurrentPage = (href: string) => {
 				textLinks.map(({ label, href }) => (
 					<li>
 						<a aria-current={isCurrentPage(href) ? 'page' : null} class="link" href={href}>
-							{label}
+							<T label={label} />
 						</a>
 					</li>
 				))
@@ -63,13 +56,14 @@ const isCurrentPage = (href: string) => {
 				textLinks.map(({ label, href }) => (
 					<li>
 						<a aria-current={isCurrentPage(href) ? 'page' : null} class="link" href={href}>
-							{label}
+							<T label={label} />
 						</a>
 					</li>
 				))
 			}
 		</ul>
 		<div class="menu-footer">
+			<LangSwitch />
 			<div class="theme-toggle">
 				<ThemeToggle />
 			</div>
@@ -209,25 +203,6 @@ const isCurrentPage = (href: string) => {
 		box-shadow: var(--shadow-lg);
 	}
 
-	.socials {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.625rem;
-		font-size: var(--icon-size);
-	}
-
-	.social {
-		display: flex;
-		padding: var(--icon-padding);
-		text-decoration: none;
-		color: var(--accent-dark);
-		transition: color var(--theme-transition);
-	}
-
-	.social:hover,
-	.social:focus {
-		color: var(--accent-text-over);
-	}
 
 	.theme-toggle {
 		display: flex;
@@ -301,19 +276,8 @@ const isCurrentPage = (href: string) => {
 			border: 0;
 			box-shadow: none;
 		}
-
-		.socials {
-			display: none;
-		}
 	}
 
-	@media (min-width: 60em) {
-		.socials {
-			display: flex;
-			justify-content: flex-end;
-			gap: 0;
-		}
-	}
 	@media (forced-colors: active) {
 		.link[aria-current='page'] {
 			color: SelectedItem;

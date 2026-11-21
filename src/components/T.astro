@@ -1,0 +1,15 @@
+---
+/** Render one label in all UI languages. CSS shows only the picked one. */
+import { type Label, uiLanguages } from '../i18n/labels';
+
+interface Props {
+	label: Label;
+	/** Values for `{key}` placeholders in the text. */
+	vars?: Record<string, string | number>;
+}
+
+const { label, vars = {} } = Astro.props;
+const fill = (text: string) => text.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m));
+---
+
+{uiLanguages.map(({ code }) => <span class="t" data-t={code} lang={code}>{fill(label[code])}</span>)}

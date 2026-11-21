@@ -1,0 +1,124 @@
+---
+import type { Label } from '../i18n/labels';
+import { labels } from '../i18n/labels';
+import T from './T.astro';
+
+interface Props {
+	icon: string;
+	label: Label;
+	items: string[];
+}
+
+const { icon, label, items } = Astro.props;
+
+/** Split "02:30 UTC and 19:30 UTC" into text and time parts. */
+const UTC_TIME = /(\d{1,2}):(\d{2})\s*UTC/g;
+type Part = { text: string } | { utc: string };
+const toParts = (line: string): Part[] => {
+	const parts: Part[] = [];
+	let last = 0;
+	for (const m of line.matchAll(UTC_TIME)) {
+		if (m.index > last) parts.push({ text: line.slice(last, m.index) });
+		parts.push({ utc: `${m[1].padStart(2, '0')}:${m[2]}` });
+		last = m.index + m[0].length;
+	}
+	if (last < line.length) parts.push({ text: line.slice(last) });
+	return parts;
+};
+---
+
+<section class="event">
+	<h2 class="event-head">
+		<img width="64" height="64" src={icon} alt="" />
+		<span><T label={label} /></span>
+	</h2>
+	<ul class="event-items">
+		{
+			items.map((line) => (
+				<li>
+					{toParts(line).map((p) =>
+						'utc' in p ? (
+							<span class="slot">
+								<time class="utc">{p.utc} UTC</time>
+								<span class="local" data-utc={p.utc} hidden>
+									<span class="local-time" /> <T label={labels.yourTime} />
+								</span>
+							</span>
+						) : (
+							<span>{p.text}</span>
+						),
+					)}
+				</li>
+			))
+		}
+	</ul>
+</section>
+
+<script>
+	/** Show each UTC time also in the viewer's own time zone. */
+	const fmt = new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit' });
+	if (new Date().getTimezoneOffset() !== 0) {
+		document.querySelectorAll<HTMLElement>('.local[data-utc]').forEach((el) => {
+			const [h, m] = el.dataset.utc!.split(':').map(Number);
+			const d = new Date();
+			d.setUTCHours(h, m, 0, 0);
+			const shift = d.getDate() - d.getUTCDate();
+			const day = shift === 0 ? '' : shift === 1 || shift < -1 ? ' +1' : ' −1';
+			el.querySelector('.local-time')!.textContent = fmt.format(d) + day;
+			el.hidden = false;
+		});
+	}
+</script>
+
+<style>
+	.event {
+		display: grid;
+		gap: 0.75rem;
+		align-content: start;
+		padding: 1rem 1.25rem;
+		background: var(--gray-50);
+		border: 3px solid var(--gray-0);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.event-head {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin: 0;
+		font-size: var(--text-lg);
+	}
+
+	.event-head img {
+		flex: none;
+		width: 3rem;
+		height: 3rem;
+	}
+
+	.event-items {
+		display: grid;
+		gap: 0.35rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-weight: 700;
+		color: var(--gray-0);
+	}
+
+	.slot {
+		display: inline-flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		column-gap: 0.5rem;
+	}
+
+	.local {
+		font-size: var(--text-sm);
+		font-weight: 400;
+		color: var(--gray-300);
+	}
+
+	.local[hidden] {
+		display: none;
+	}
+</style>

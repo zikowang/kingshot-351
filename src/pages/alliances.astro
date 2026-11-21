@@ -4,6 +4,7 @@ import AlliancePreview from '../components/AlliancePreview.astro';
 import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import { displayAlliances } from '../constants/constants';
+import { ui } from '../i18n/labels';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const alliances = (await getCollection('alliances'))
@@ -20,8 +21,8 @@ const alliances = (await getCollection('alliances'))
 	<div class="stack gap-20">
 		<main class="wrapper stack gap-8">
 			<Hero
-				title="Alliances"
-				tagline="See our alliances below to get an idea of our kingdom."
+				title={ui.navAlliances}
+				tagline={ui.alliancesTagline}
 				align="start"
 			/>
 			<Grid>

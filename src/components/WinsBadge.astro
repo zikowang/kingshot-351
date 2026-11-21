@@ -1,0 +1,37 @@
+---
+import { splitWins } from '../utils/wins';
+
+interface Props {
+	wins?: number;
+	size?: string;
+}
+
+const { wins, size = '20px' } = Astro.props;
+const { total, suns, moons, stars } = splitWins(wins);
+const icons = [
+	...Array(suns).fill('/assets/icons/sun.png'),
+	...Array(moons).fill('/assets/icons/moon.png'),
+	...Array(stars).fill('/assets/icons/star.png'),
+];
+---
+
+{
+	total > 0 && (
+		<div class="wins" role="img" aria-label={`${total} ${total === 1 ? 'win' : 'wins'}`} title={`${total} wins`} style={{ '--win-size': size }}>
+			{icons.map((src) => <img src={src} alt="" />)}
+		</div>
+	)
+}
+
+<style>
+	.wins {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+
+	.wins > img {
+		width: var(--win-size);
+		height: var(--win-size);
+	}
+</style>

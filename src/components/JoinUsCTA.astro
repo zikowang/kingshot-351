@@ -1,14 +1,13 @@
 ---
+import { ui } from '../i18n/labels';
+import T from './T.astro';
 ---
 
 <aside>
 	<section class="wrapper section with-background bg-variant">
 		<header class="section-header stack gap-2 lg:gap-4">
-			<h3>Want to join us?</h3>
-			<p>
-				If you are interested in joining Kingdom 351 or want to learn more about our alliances,
-				please get in touch with R5s or R4s!
-			</p>
+			<h3><T label={ui.joinTitle} /></h3>
+			<p><T label={ui.joinText} /></p>
 		</header>
 	</section>
 </aside>

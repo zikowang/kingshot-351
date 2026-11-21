@@ -10,6 +10,8 @@ import Skills from '../components/Skills.astro';
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import JoinUsCTA from '../components/JoinUsCTA.astro';
 import { displayAlliances } from '../constants/constants';
+import T from '../components/T.astro';
+import { ui } from '../i18n/labels';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 // Content Fetching: List four most recent work alliances
@@ -26,9 +28,9 @@ const alliances = (await getCollection('alliances'))
 		<div class="wrapper stack gap-8 lg:gap-10">
 			<img
 				class="hero-img"
-				alt="Jeanine White smiling in a red plaid shirt and tortoise shell glasses"
-				width="auto"
-				height="auto"
+				alt="Kingdom 351 banner"
+				width="1118"
+				height="634"
 				src="/assets/kingdom-351-horizontal.png"
 			/>
 
@@ -38,8 +40,8 @@ const alliances = (await getCollection('alliances'))
 		<main class="wrapper stack gap-20 lg:gap-20">
 			<section class="section with-background with-cta">
 				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Alliances</h3>
-					<p>Take a look below at our top alliances.</p>
+					<h3><T label={ui.navAlliances} /></h3>
+					<p><T label={ui.alliancesIntro} /></p>
 				</header>
 
 				<div class="gallery">
@@ -56,7 +58,7 @@ const alliances = (await getCollection('alliances'))
 
 				<div class="cta">
 					<CallToAction href="/alliances/">
-						View All
+						<T label={ui.viewAll} />
 						<Icon icon="arrow-right" size="1.2em" />
 					</CallToAction>
 				</div>
@@ -69,43 +71,13 @@ const alliances = (await getCollection('alliances'))
 </BaseLayout>
 
 <style>
-	.hero {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 2rem;
-	}
-
-	.roles {
-		display: none;
-	}
-
 	.hero-img {
+		width: 100%;
 		object-fit: cover;
 		object-position: top;
 		border: 3px solid var(--gray-0);
 		border-radius: 0;
 		box-shadow: 7px 7px 0 var(--accent-regular);
-	}
-
-	@media (min-width: 50em) {
-		.hero {
-			display: grid;
-			grid-template-columns: 6fr 4fr;
-			padding-inline: 2.5rem;
-			gap: 3.75rem;
-		}
-
-		.roles {
-			margin-top: 0.5rem;
-			display: flex;
-			gap: 0.5rem;
-		}
-
-		.hero-img {
-			border-radius: 0;
-			object-fit: cover;
-		}
 	}
 
 	/* ====================================================== */
@@ -140,9 +112,6 @@ const alliances = (await getCollection('alliances'))
 		z-index: -1;
 	}
 
-	.with-background.bg-variant::before {
-		--hero-bg: var(--bg-image-subtle-1);
-	}
 
 	.section-header {
 		justify-self: center;
@@ -191,25 +160,4 @@ const alliances = (await getCollection('alliances'))
 		}
 	}
 
-	/* ====================================================== */
-
-	.mention-card {
-		display: flex;
-		height: 7rem;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		border: 1px solid var(--gray-800);
-		border-radius: 1.5rem;
-		color: var(--gray-300);
-		background: var(--gradient-subtle);
-		box-shadow: var(--shadow-sm);
-	}
-
-	@media (min-width: 50em) {
-		.mention-card {
-			border-radius: 1.5rem;
-			height: 9.5rem;
-		}
-	}
 </style>

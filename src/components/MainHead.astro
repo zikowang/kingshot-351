@@ -22,7 +22,7 @@ const {
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-	href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap"
+	href="https://fonts.googleapis.com/css2?family=Tiny5&family=Public+Sans:ital,wght@0,400;0,700;1,400&display=swap"
 	rel="stylesheet"
 />
 <script is:inline>
@@ -33,6 +33,15 @@ const {
 		}
 		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 	};
+	// Pick label language: saved choice, else browser language, else English.
+	(() => {
+		const langs = ['en', 'ko', 'zh', 'fr', 'de', 'tr'];
+		let lang;
+		try { lang = localStorage.getItem('ui-lang'); } catch {}
+		if (!langs.includes(lang)) lang = (navigator.language || 'en').slice(0, 2).toLowerCase();
+		document.documentElement.dataset.uiLang = langs.includes(lang) ? lang : 'en';
+	})();
+
 	const isDark = getThemePreference() === 'dark';
 	document.documentElement.classList[isDark ? 'add' : 'remove']('theme-dark');
 

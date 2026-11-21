@@ -68,7 +68,7 @@
     system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   --font-body: "Public Sans", var(--font-system);
-  --font-brand: "Pixelify Sans", Rubik, var(--font-system);
+  --font-brand: "Tiny5", var(--font-system);
 
   /* Transitions */
   --theme-transition: 0.18s ease-out;
@@ -98,7 +98,6 @@
 
   --link-color: var(--accent-light);
 
-  --gradient-stop-1: #4c11c6;
   --gradient-subtle: linear-gradient(
     145deg,
     var(--gray-100),
@@ -132,6 +131,8 @@ body {
   color: var(--gray-200);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  /* Pixel font has one weight: no fake bold. */
+  font-synthesis-weight: none;
   line-height: 1.5;
 }
 
@@ -203,6 +204,30 @@ h5 {
 ::selection {
   color: var(--accent-text-over);
   background: var(--accent-light);
+}
+
+/* Label language switch: show only the picked language. */
+.t {
+  display: none;
+}
+:root[data-ui-lang="en"] .t[data-t="en"],
+:root:not([data-ui-lang]) .t[data-t="en"] {
+  display: inline;
+}
+:root[data-ui-lang="ko"] .t[data-t="ko"] {
+  display: inline;
+}
+:root[data-ui-lang="zh"] .t[data-t="zh"] {
+  display: inline;
+}
+:root[data-ui-lang="fr"] .t[data-t="fr"] {
+  display: inline;
+}
+:root[data-ui-lang="de"] .t[data-t="de"] {
+  display: inline;
+}
+:root[data-ui-lang="tr"] .t[data-t="tr"] {
+  display: inline;
 }
 
 /* Utilities */

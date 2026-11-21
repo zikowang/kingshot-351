@@ -25,17 +25,6 @@ const currentYear = new Date().getFullYear();
 		font-size: var(--text-sm);
 	}
 
-	footer a {
-		color: var(--gray-400);
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
-	}
-
-	footer a:hover,
-	footer a:focus {
-		text-decoration-color: currentColor;
-	}
 
 	.group {
 		display: flex;
@@ -43,12 +32,6 @@ const currentYear = new Date().getFullYear();
 		gap: 0.5rem;
 	}
 
-	.socials {
-		display: flex;
-		justify-content: center;
-		gap: 1rem;
-		flex-wrap: wrap;
-	}
 
 	@media (min-width: 50em) {
 		footer {
@@ -61,10 +44,6 @@ const currentYear = new Date().getFullYear();
 			flex-direction: row;
 			gap: 1rem;
 			flex-wrap: wrap;
-		}
-
-		.socials {
-			justify-content: flex-end;
 		}
 	}
 </style>

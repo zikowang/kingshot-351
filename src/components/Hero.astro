@@ -1,7 +1,10 @@
 ---
+import type { Label } from '../i18n/labels';
+import T from './T.astro';
+
 interface Props {
-	title: string;
-	tagline?: string;
+	title: string | Label;
+	tagline?: string | Label;
 	align?: 'start' | 'center';
 }
 
@@ -10,8 +13,8 @@ const { align = 'center', tagline, title } = Astro.props;
 
 <div class:list={['hero stack gap-4', align]}>
 	<div class="stack gap-2">
-		<h1 class="title">{title}</h1>
-		{tagline && <p class="tagline">{tagline}</p>}
+		<h1 class="title">{typeof title === 'string' ? title : <T label={title} />}</h1>
+		{tagline && <p class="tagline">{typeof tagline === 'string' ? tagline : <T label={tagline} />}</p>}
 	</div>
 	<slot />
 </div>
