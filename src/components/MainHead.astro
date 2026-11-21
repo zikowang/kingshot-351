@@ -26,6 +26,48 @@ const {
 	rel="stylesheet"
 />
 <script is:inline>
+	// Page transitions. Inline in head so `pagereveal` is caught before first paint.
+	// - Kingdom <-> Alliances: slide sideways (class vt-slide-next / vt-slide-prev).
+	// - Alliance card <-> alliance page: card image grows into page image.
+	// - Anything else: default fade from global.css.
+	(() => {
+		const norm = (p) => (p.length > 1 && p.endsWith('/') ? p.slice(0, -1) : p);
+		const tabs = ['/', '/alliances'];
+		const isDetail = (p) => /^\/alliances\/[^/]+$/.test(p);
+		const nameImg = (img) => img && (img.style.viewTransitionName = 'alliance-img');
+		const cardImg = (detail) =>
+			[...document.querySelectorAll('a.card')].find((a) => norm(new URL(a.href).pathname) === detail)
+				?.querySelector('img');
+		const detailImg = () => document.querySelector('main img');
+
+		// Old page: name the image that should morph before its snapshot is taken.
+		addEventListener('pageswap', (e) => {
+			if (!e.viewTransition || !e.activation) return;
+			const from = norm(location.pathname);
+			const to = norm(new URL(e.activation.entry.url).pathname);
+			try { sessionStorage.setItem('vt-from', from); } catch {}
+			if (isDetail(to)) nameImg(cardImg(to));
+			else if (isDetail(from)) nameImg(detailImg());
+		});
+
+		// New page: pick the animation and name the matching image.
+		addEventListener('pagereveal', (e) => {
+			if (!e.viewTransition) return;
+			let from;
+			try { from = sessionStorage.getItem('vt-from'); } catch {}
+			const to = norm(location.pathname);
+			const a = tabs.indexOf(from);
+			const b = tabs.indexOf(to);
+			const root = document.documentElement;
+			let cls;
+			if (a !== -1 && b !== -1 && a !== b) cls = b > a ? 'vt-slide-next' : 'vt-slide-prev';
+			else if (isDetail(to)) nameImg(detailImg());
+			else if (from && isDetail(from)) nameImg(cardImg(from));
+			if (cls) root.classList.add(cls);
+			e.viewTransition.finished.finally(() => cls && root.classList.remove(cls));
+		});
+	})();
+
 	// This code is inlined in the head to make dark mode instant & blocking.
 	const getThemePreference = () => {
 		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {

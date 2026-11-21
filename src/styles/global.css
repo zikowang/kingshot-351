@@ -307,3 +307,83 @@ h5 {
     gap: 12rem;
   }
 }
+
+/* Page transitions: native cross-document view transitions (no JS router). */
+@view-transition {
+  navigation: auto;
+}
+
+/* Nav keeps still while the page under it changes. */
+nav.wrapper {
+  view-transition-name: site-nav;
+}
+
+::view-transition-old(root) {
+  animation: 160ms ease-in both page-out;
+}
+::view-transition-new(root) {
+  animation: 280ms cubic-bezier(0.2, 0.8, 0.2, 1) 60ms both page-in;
+}
+::view-transition-group(*) {
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* Kingdom <-> Alliances tabs: slide sideways, like switching tabs.
+   Class is set by the page-transition script in MainHead.astro. */
+html.vt-slide-next::view-transition-old(root) {
+  animation: 260ms cubic-bezier(0.4, 0, 1, 1) both slide-to-left;
+}
+html.vt-slide-next::view-transition-new(root) {
+  animation: 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both slide-from-right;
+}
+html.vt-slide-prev::view-transition-old(root) {
+  animation: 260ms cubic-bezier(0.4, 0, 1, 1) both slide-to-right;
+}
+html.vt-slide-prev::view-transition-new(root) {
+  animation: 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both slide-from-left;
+}
+
+@keyframes slide-to-left {
+  to {
+    opacity: 0;
+    transform: translateX(-6%);
+  }
+}
+@keyframes slide-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(6%);
+  }
+}
+@keyframes slide-to-right {
+  to {
+    opacity: 0;
+    transform: translateX(6%);
+  }
+}
+@keyframes slide-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-6%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
